@@ -3,7 +3,7 @@ class InstarModel {
 
     constructor(data) {
         extendObservable(this, data);
-      }
+    }
     
     
 }

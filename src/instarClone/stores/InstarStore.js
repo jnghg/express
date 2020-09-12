@@ -7,17 +7,19 @@ class InstarStore {
 
     @observable
     user = {
-        name: '',
-        age: '',
+        myName: '',
+        myAge: '',
+        jimonName: '',
+        jimonAge: '',
     };
 
-    // api 호출
+    // 내정보
     @action
-    async callSayHello() {
+    async findMySelf() {
 
-        const result = await InstarRepository.callSayHello();
+        const result = await InstarRepository.findMySelf();
 
-        console.log('return :', result);
+        console.log('내정보 :', result);
 
         runInAction(() => {
             this.user = {
@@ -26,6 +28,33 @@ class InstarStore {
                 age: result.age || '',
             };
         });
+    }
+
+    // 지몬이정보
+    @action
+    async findJimonInfo() {
+        const result = await InstarRepository.findJimonInfo();
+
+        console.log('지몬이 정보: ', result);
+
+        runInAction(() => {
+            this.user = {
+                ...this.user,
+                jimonName: result.name || '',
+                jimonAge: result.age || '',
+            };
+        });
+    }
+
+    // 초기화
+    @action
+    clear() {
+        this.user = {
+            myName: '',
+            myAge: '',
+            jimonName: '',
+            jimonAge: '',
+        };
     }
 
 }

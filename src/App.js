@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Route } from 'react-router-dom';
+import InstarMaincontainer from './instarClone/containers/InstarMainContainer';
 
 class App extends Component {
   render() {
-    return (
-      <div className="myExpressApp">
-        Hello react
-      </div>
-    )
+      return (
+        <div>
+            <Route exact path="/" component={InstarMaincontainer} />
+        </div>
+    );
   }
 }
 

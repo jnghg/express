@@ -1,4 +1,4 @@
-import { observable, action, toJS, computed, runInAction, instance } from 'mobx';
+import { observable, action, toJS, computed, runInAction } from 'mobx';
 import { autobind } from 'core-decorators';
 import InstarRepository from '../repository/InstarRepository';
 
@@ -7,53 +7,41 @@ class InstarStore {
 
     @observable
     user = {
-        myName: '',
-        myAge: '',
-        jimonName: '',
-        jimonAge: '',
+        email: '',
+        password: '',
     };
 
-    // 내정보
+    @computed
+    get getUser() {
+        return toJS(this.user);
+    }
+
+    /** Login Input onChange */
+    onChangeLogin(data) {
+        this.user = {
+            ...this.user,
+            [data.name]: data.value,
+        };
+    }
+
+    /** Send Login */
     @action
-    async findMySelf() {
-
-        const result = await InstarRepository.findMySelf();
-
-        console.log('내정보 :', result);
-
+    async sendLogin(user) {
+        const returnLogin = await InstarRepository.sendLogin(user);
+        
         runInAction(() => {
-            this.user = {
-                ...this.user,
-                name: result.name || '',
-                age: result.age || '',
-            };
+            if (returnLogin !== null) {
+                console.log('returnLogin :', returnLogin);
+            }
         });
     }
 
-    // 지몬이정보
-    @action
-    async findJimonInfo() {
-        const result = await InstarRepository.findJimonInfo();
-
-        console.log('지몬이 정보: ', result);
-
-        runInAction(() => {
-            this.user = {
-                ...this.user,
-                jimonName: result.name || '',
-                jimonAge: result.age || '',
-            };
-        });
-    }
-
-    // 초기화
+    /** User Info reset */
     @action
     clear() {
         this.user = {
-            myName: '',
-            myAge: '',
-            jimonName: '',
-            jimonAge: '',
+            email: '',
+            password: '',
         };
     }
 

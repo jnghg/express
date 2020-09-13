@@ -4,6 +4,13 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 class LoginView extends React.PureComponent {
 
     render() {
+
+        const { 
+            getUser,        // 유저정보
+            onChangeLogin,  // Input onChange
+            sendLogin,      // send login
+        } = this.props;
+
         return (
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450 }}>
@@ -12,22 +19,32 @@ class LoginView extends React.PureComponent {
                 </Header>
                 <Form size='large'>
                     <Segment stacked>
-                    <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+                    <Form.Input 
+                        fluid icon='user' 
+                        iconPosition='left' 
+                        placeholder='E-mail address'
+                        name="email"
+                        value={getUser.email}
+                        onChange={onChangeLogin}
+                    />
                     <Form.Input
                         fluid
                         icon='lock'
                         iconPosition='left'
                         placeholder='Password'
                         type='password'
+                        name="password"
+                        value={getUser.password}
+                        onChange={onChangeLogin}
                     />
 
-                    <Button color='teal' fluid size='large'>
+                    <Button color='teal' fluid size='large' onClick={sendLogin}>
                         Login
                     </Button>
                     </Segment>
                 </Form>
                 <Message>
-                    New to us? <a href='#'>Sign Up</a>
+                    Sign Up
                 </Message>
                 </Grid.Column>
             </Grid>

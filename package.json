@@ -31,7 +31,7 @@
   "scripts": {
     "start": "npm-run-all --parallel start:**",
     "start:client": "react-app-rewired start",
-    "start:server": "node ./servers/server.js",
+    "start:server": "nodemon ./servers/server.js",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"

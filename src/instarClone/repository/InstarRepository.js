@@ -5,8 +5,7 @@ class InstarRepository {
     /** Send Login */
     sendLogin(user) {
         return axios.post(`/api/login`, user)
-            .then(res => res ? res.data : null);
-
+        .then(res => res ? res.data : null);
     }
 }
 

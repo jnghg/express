@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Image, Segment, Message } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 class LoginView extends React.PureComponent {
 
@@ -43,8 +44,9 @@ class LoginView extends React.PureComponent {
                     </Button>
                     </Segment>
                 </Form>
+
                 <Message>
-                    Sign Up
+                    <Link to = "/signUp">Sign Up</Link>
                 </Message>
                 </Grid.Column>
             </Grid>
